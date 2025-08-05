@@ -1,3 +1,12 @@
+export const formatCpf = (value: string): string => {
+	const cleanValue = value.replace(/[^\d]/g, '');
+
+	if (cleanValue.length <= 3) return cleanValue;
+	if (cleanValue.length <= 6) return `${cleanValue.slice(0, 3)}.${cleanValue.slice(3)}`;
+	if (cleanValue.length <= 9) return `${cleanValue.slice(0, 3)}.${cleanValue.slice(3, 6)}.${cleanValue.slice(6)}`;
+	return `${cleanValue.slice(0, 3)}.${cleanValue.slice(3, 6)}.${cleanValue.slice(6, 9)}-${cleanValue.slice(9, 11)}`;
+};
+
 export const formatTime = (timestamp: string) => {
   return new Date(timestamp).toLocaleTimeString('pt-BR', {
     hour: '2-digit',

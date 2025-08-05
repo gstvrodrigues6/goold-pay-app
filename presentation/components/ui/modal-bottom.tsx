@@ -20,12 +20,12 @@ export function ModalBottom({
       animationType="none"
     >
       <TouchableOpacity
-        className="bg-black/75 flex-1 justify-end"
+        className="bg-black/80 flex-1 justify-end"
         onPress={onClose}
         activeOpacity={0.7}
       >
         <TouchableWithoutFeedback onPress={(e) => e.stopPropagation()}>
-          <View className="bg-white rounded-t-xl w-full" style={{ minHeight: 280 }}>
+          <View className="bg-white rounded-t-xl w-full" style={{ minHeight: 540 }}>
             {children}
           </View>
         </TouchableWithoutFeedback>
