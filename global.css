@@ -15,4 +15,8 @@
     .font-bold {
       font-family: 'Montserrat-Bold';
     }
+
+  .bg-gradient {
+    background: linear-gradient(to right, #D9032C, #A3001F);
+  }
 }
