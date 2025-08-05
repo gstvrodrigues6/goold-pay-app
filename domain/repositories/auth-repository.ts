@@ -1,4 +1,4 @@
-import { AuthTokens, LoginCredentials, RegisterData } from "@/@types/user";
+import { AuthTokens, LoginCredentials, RegisterData } from "@/shared/types/auth";
 import { User } from "../entities/user";
 
 export interface AuthRepository {

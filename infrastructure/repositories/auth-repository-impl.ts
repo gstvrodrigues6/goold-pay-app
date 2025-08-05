@@ -1,6 +1,7 @@
+import { User } from "@/domain/entities/user";
 import type { AuthRepository } from "@/domain/repositories/auth-repository";
+import { ApiResponse, AuthTokens, LoginCredentials, RegisterData } from "@/shared/types/auth";
 import { apiClient } from "../api/api-client";
-import { ApiResponse, AuthTokens, LoginCredentials, RegisterData, User } from "@/@types/user";
 
 export class AuthRepositoryImpl implements AuthRepository {
   async login(credentials: LoginCredentials): Promise<{ user: User; tokens: AuthTokens }> {

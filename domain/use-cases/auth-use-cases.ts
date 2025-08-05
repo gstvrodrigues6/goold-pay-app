@@ -1,4 +1,4 @@
-import { LoginCredentials, RegisterData } from "@/@types/user"
+import { LoginCredentials, RegisterData } from "@/shared/types/auth"
 import { AuthRepository } from "../repositories/auth-repository"
 
 export class AuthUseCases {
