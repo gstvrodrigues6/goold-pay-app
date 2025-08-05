@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+    .font-normal {
+      font-family: 'Montserrat-Regular';
+    }
+    .font-medium {
+      font-family: 'Montserrat-Medium';
+    }
+    .font-semibold {
+      font-family: 'Montserrat-SemiBold';
+    }
+    .font-bold {
+      font-family: 'Montserrat-Bold';
+    }
+}
