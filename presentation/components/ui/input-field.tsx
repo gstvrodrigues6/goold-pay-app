@@ -5,6 +5,7 @@ import { Text, TextInput, TextInputProps, View } from 'react-native';
 
 interface InputFieldProps<T extends FieldValues> extends Omit<TextInputProps, 'onChangeText'> {
 	label: string;
+	label2?: string;
 	name: keyof T & string;
 	control: Control<T>;
 	rules?: RegisterOptions<T>;
@@ -14,7 +15,8 @@ interface InputFieldProps<T extends FieldValues> extends Omit<TextInputProps, 'o
 }
 
 export const InputField = forwardRef<TextInput, InputFieldProps<any>>(({
-	label, 
+	label,
+	label2,
 	name,
 	control,
 	rules,
@@ -25,7 +27,12 @@ export const InputField = forwardRef<TextInput, InputFieldProps<any>>(({
   }, ref) => {
 	return (
 		<View className='pb-6'>
-			<Text className='text-sm pb-2 font-normal'>{label}</Text>
+			{(label || label2) && (
+				<View className='flex-row items-center pb-1'>
+					{label && <Text className="font-medium text-base">{label}</Text>}
+					{label2 && <Text className="font-normal text-sm"> {label2}</Text>}
+				</View>
+			)}
 			<Controller
 				name={name}
 				control={control}

@@ -8,6 +8,16 @@ export default function AuthLayout() {
         headerShown: false,
       }}>
       <Stack.Screen name="home" />
+      <Stack.Screen
+       options={{
+          headerShown: false,
+          animation: 'none',
+          presentation: 'transparentModal',
+          gestureEnabled: true,
+          contentStyle: { backgroundColor: 'transparent' },
+        }}
+        name="auth-modal" 
+      />
       <Stack.Screen name="create-account" />
     </Stack>
   );

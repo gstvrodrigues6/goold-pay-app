@@ -60,12 +60,12 @@ export const PinInput = forwardRef<PinInputRef, PinInputProps>(
 		};
 
 		return (
-			<View className="pb-2">
-				<View className="flex items-center justify-between pb-1">
+			<View className="pb-2 w-full">
+				<View className="flex-row items-center justify-between pb-1">
 					{(label || label2) && (
-						<View>
-							{label && <Text className="text-sm font-medium">{label}</Text>}
-							{label2 && <Text className="text-xs font-normal"> {label2}</Text>}
+						<View className='flex-row items-center'>
+							{label && <Text className="text-base font-medium">{label}</Text>}
+							{label2 && <Text className="text-sm font-normal"> {label2}</Text>}
 						</View>
 					)}
 
@@ -86,7 +86,7 @@ export const PinInput = forwardRef<PinInputRef, PinInputProps>(
 							.map((_, index) => value[index] || '');
 
 						return (
-							<View className="flex gap-2 w-full justify-center px-0.5">
+							<View className="flex-row w-full gap-2 justify-center px-0.5">
 								{values.map((val, index) => (
 									<TextInput
 										key={index}
@@ -99,7 +99,7 @@ export const PinInput = forwardRef<PinInputRef, PinInputProps>(
 										onKeyPress={({ nativeEvent }) => 
 											handleKeyPress(index, nativeEvent.key, values, onChange)
 										}
-										className="w-1/6 aspect-square text-center text-xl font-semibold border rounded-lg bg-[#F6F4F1] focus:bg-white focus:ring-1 focus:ring-primarycolor focus:outline-none transition-all"
+										className="flex-1 text-center aspect-square text-xl font-semibold border border-border rounded-lg bg-[#F6F4F1] focus:bg-white focus:ring-1 focus:ring-primarycolor focus:outline-none transition-all"
 										maxLength={1}
 										inputMode="numeric"
 										keyboardType="numeric"
