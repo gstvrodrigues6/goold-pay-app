@@ -1,4 +1,4 @@
-import { FingerprintIcon } from '@/presentation/assets/svg/FingerprintIcon';
+import { FingerprintIcon } from '@/presentation/assets/svg/fingerprint-icon';
 import { formatCpf } from '@/shared/utils/format';
 import { forwardRef, useState } from 'react';
 import { Text, TextInput, TextInputProps, View } from 'react-native';

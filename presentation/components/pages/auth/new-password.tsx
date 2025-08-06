@@ -1,4 +1,4 @@
-import { PadlockIcon } from "@/presentation/assets/svg/PadlockIcon"
+import { PadlockIcon } from "@/presentation/assets/svg/padlock-icon"
 import React, { useRef } from "react"
 import { useForm } from "react-hook-form"
 import { Text, TextInput, View } from "react-native"

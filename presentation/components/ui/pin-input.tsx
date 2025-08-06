@@ -1,5 +1,5 @@
-import { EyeCloseIcon } from '@/presentation/assets/svg/EyeCloseIcon';
-import { EyeOpenIcon } from '@/presentation/assets/svg/EyeOpenIcon';
+import { EyeCloseIcon } from '@/presentation/assets/svg/eye-close-icon';
+import { EyeOpenIcon } from '@/presentation/assets/svg/eye-open-icon';
 import { forwardRef, useImperativeHandle, useRef, useState } from 'react';
 import { Control, Controller, FieldError, RegisterOptions } from 'react-hook-form';
 import { Text, TextInput, TouchableOpacity, View } from 'react-native';

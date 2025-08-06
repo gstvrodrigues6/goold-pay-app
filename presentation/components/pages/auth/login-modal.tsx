@@ -1,5 +1,5 @@
-import { LongArrowLeftIcon } from "@/presentation/assets/svg/LongArrowLeftIcon"
-import { SafeIcon } from "@/presentation/assets/svg/SafeIcon"
+import { LongArrowLeftIcon } from "@/presentation/assets/svg/long-arrow-left-icon"
+import { SafeIcon } from "@/presentation/assets/svg/safe-icon"
 import { Link } from "expo-router"
 import { useRef } from "react"
 import { useForm } from "react-hook-form"

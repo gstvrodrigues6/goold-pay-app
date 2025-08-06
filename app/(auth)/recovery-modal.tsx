@@ -1,4 +1,4 @@
-import { CloseIcon } from "@/presentation/assets/svg/CloseIcon";
+import { CloseIcon } from "@/presentation/assets/svg/close-icon";
 import { ConfirmCode } from "@/presentation/components/pages/auth/confirm-code";
 import { NewPassword } from "@/presentation/components/pages/auth/new-password";
 import { RequestCode } from "@/presentation/components/pages/auth/request-code";

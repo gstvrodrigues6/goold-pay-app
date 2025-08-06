@@ -1,4 +1,4 @@
-import { GooldIcon } from "@/presentation/assets/svg/GooldIcon";
+import { GooldIcon } from "@/presentation/assets/svg/goold-icon";
 import { AuthLoginModal } from "@/presentation/components/pages/auth/login-modal";
 import { Button } from "@/presentation/components/ui/button";
 import { Link } from "expo-router";

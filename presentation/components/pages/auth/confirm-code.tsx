@@ -1,4 +1,4 @@
-import { MailPictureIcon } from "@/presentation/assets/svg/MailPictureIcon"
+import { MailPictureIcon } from "@/presentation/assets/svg/mail-picture-icon"
 import React, { useRef } from "react"
 import { useForm } from "react-hook-form"
 import { Text, TextInput, TouchableOpacity, View } from "react-native"
