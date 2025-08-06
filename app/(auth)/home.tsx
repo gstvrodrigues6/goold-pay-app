@@ -31,7 +31,7 @@ export default function HomeScreen() {
               Acessar minha conta
             </Button>
             <Link href="/(auth)/create-account" className="rounded-md items-center justify-center px-5 py-2">
-              <Text className='font-bold text-lg underline'>
+              <Text className='font-bold text-lg underline text-center'>
                 Criar conta Goold Pay
               </Text>
             </Link>

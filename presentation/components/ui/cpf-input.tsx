@@ -24,7 +24,7 @@ export const CpfInput = forwardRef<TextInput, CpfInputProps>(
 		};
 
 		return (
-			<View className="w-full pb-2">
+			<View className="pb-6">
 				{(label || label2) && (
 					<View className='flex-row items-center pb-1'>
 						{label && <Text className="font-medium text-base">{label}</Text>}
@@ -40,6 +40,7 @@ export const CpfInput = forwardRef<TextInput, CpfInputProps>(
 						{...props}
 						ref={ref}
 						value={formatCpf(displayValue)}
+						placeholderTextColor={'#A0A0A0'}
 						onChangeText={handleChangeText}
 						maxLength={14}
 						placeholder={props.placeholder || '000.000.000-00'}
