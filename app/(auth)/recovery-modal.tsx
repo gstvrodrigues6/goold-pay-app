@@ -19,7 +19,9 @@ export default function RecoveryModalScreen() {
         <CloseIcon width={12} />
       </TouchableOpacity>
       <View className="p-6">
-        
+        {step === 1 && <View></View>}
+        {step === 2 && <View></View>}
+        {step === 3 && <View></View>}
       </View>
     </ModalRouter>
   )
