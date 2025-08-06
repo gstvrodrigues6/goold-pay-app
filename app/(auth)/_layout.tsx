@@ -16,7 +16,7 @@ export default function AuthLayout() {
           gestureEnabled: true,
           contentStyle: { backgroundColor: 'transparent' },
         }}
-        name="auth-modal" 
+        name="recovery-modal" 
       />
       <Stack.Screen name="create-account" />
     </Stack>
