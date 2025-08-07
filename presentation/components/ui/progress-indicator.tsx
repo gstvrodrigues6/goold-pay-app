@@ -7,7 +7,7 @@ interface ProgressIndicatorProps {
 
 export function ProgressIndicator({ currentStep, totalSteps }: ProgressIndicatorProps) {
   return (
-    <View className="flex-row gap-x-4 px-7 py-8">
+    <View className="flex-row gap-x-4 px-5 pb-6 pt-4">
       {Array.from({ length: totalSteps }).map((_, index) => (
         <View
           key={index}

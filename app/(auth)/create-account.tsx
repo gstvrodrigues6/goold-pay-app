@@ -1,7 +1,7 @@
 import { LongArrowLeftIcon } from '@/presentation/assets/svg/long-arrow-left-icon';
 import { SafeIcon } from '@/presentation/assets/svg/safe-icon';
-import { Button } from '@/presentation/components/ui/button';
-import { ProgressIndicator } from '@/presentation/components/ui/progress-indicator';
+import CreateAccountStep1 from '@/presentation/components/pages/create-account/create-account-step-1';
+import CreateAccountStep2 from '@/presentation/components/pages/create-account/create-account-step-2';
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
 import { SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
@@ -33,9 +33,9 @@ export default function CreateAccountScreen() {
           <Text className="text-base">Ambiente 100% seguro!</Text>
         </View>
       </View>
-      <View className="flex-1">
-        
-      </View>
+
+      {step === 1 && <CreateAccountStep1 step={step} incrementStep={() => setStep(2)}/> }
+      {step === 2 && <CreateAccountStep2 step={step} incrementStep={() => setStep(3)}/> }
     </SafeAreaView>
   );
 }
