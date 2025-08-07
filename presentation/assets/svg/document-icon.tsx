@@ -1,6 +1,6 @@
 import Svg, { Path, SvgProps } from "react-native-svg";
 
-export const FaceIdIcon = (props: SvgProps) => (
+export const DocumentIcon = (props: SvgProps) => (
   <Svg
     width={22}
     height={22}

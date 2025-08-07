@@ -4,7 +4,7 @@ import { Button } from '../../ui/button';
 import { ProgressIndicator } from '../../ui/progress-indicator';
 import { WhatsappIcon } from '@/presentation/assets/svg/whatsapp-icon';
 import { IdentityDocIcon } from '@/presentation/assets/svg/identity-doc-icon';
-import { FaceIdIcon } from '@/presentation/assets/svg/face-id-icon';
+import { DocumentIcon } from '@/presentation/assets/svg/document-icon';
 
 export default function CreateAccountStep3({ step, incrementStep }: { step: number, incrementStep: () => void }) {
   return (
@@ -62,7 +62,7 @@ const steps = [
   },
   {
     id: 4,
-    icon: <FaceIdIcon />,
+    icon: <DocumentIcon />,
     title: 'Passo 4',
     text: 'Vamos fazer uma verificação facial via liveness',
   },
