@@ -6,6 +6,8 @@ import CreateAccountStep3 from '@/presentation/components/pages/create-account/c
 import VerifyAccountStep1 from '@/presentation/components/pages/create-account/verify-account-step-1';
 import VerifyAccountStep2 from '@/presentation/components/pages/create-account/verify-account-step-2';
 import VerifyAccountStep3 from '@/presentation/components/pages/create-account/verify-account-step-3';
+import VerifyAccountStep4 from '@/presentation/components/pages/create-account/verify-account-step-4';
+import VerifyAccountStep5 from '@/presentation/components/pages/create-account/verify-account-step-5';
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
 import { SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
@@ -45,6 +47,8 @@ export default function CreateAccountScreen() {
       {step === 4 && <VerifyAccountStep1 incrementStep={() => setStep(5)}/>}
       {step === 5 && <VerifyAccountStep2 incrementStep={() => setStep(6)}/>}
       {step === 6 && <VerifyAccountStep3 incrementStep={() => setStep(7)}/>}
+      {step === 7 && <VerifyAccountStep4 incrementStep={() => setStep(8)}/>}
+      {step === 8 && <VerifyAccountStep5 incrementStep={() => setStep(9)}/>}
     </SafeAreaView>
   );
 }
