@@ -2,6 +2,8 @@ import { LongArrowLeftIcon } from '@/presentation/assets/svg/long-arrow-left-ico
 import { SafeIcon } from '@/presentation/assets/svg/safe-icon';
 import CreateAccountStep1 from '@/presentation/components/pages/create-account/create-account-step-1';
 import CreateAccountStep2 from '@/presentation/components/pages/create-account/create-account-step-2';
+import CreateAccountStep3 from '@/presentation/components/pages/create-account/create-account-step-3';
+import VerifyAccountStep1 from '@/presentation/components/pages/create-account/verify-account-step-1';
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
 import { SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
@@ -25,7 +27,8 @@ export default function CreateAccountScreen() {
           >
             <LongArrowLeftIcon />
           </TouchableOpacity>
-          <Text className="font-medium text-xl">Criar conta</Text>
+          {step < 3 && <Text className="font-medium text-xl">Criar conta</Text>}
+          {step > 3 && <Text className="font-medium text-xl">Verificação</Text>}
         </View>
         
         <View className="flex-row items-center gap-1">
@@ -36,6 +39,8 @@ export default function CreateAccountScreen() {
 
       {step === 1 && <CreateAccountStep1 step={step} incrementStep={() => setStep(2)}/> }
       {step === 2 && <CreateAccountStep2 step={step} incrementStep={() => setStep(3)}/> }
+      {step === 3 && <CreateAccountStep3 step={step} incrementStep={() => setStep(4)}/>}
+      {step === 4 && <VerifyAccountStep1 incrementStep={() => setStep(5)}/>}
     </SafeAreaView>
   );
 }
