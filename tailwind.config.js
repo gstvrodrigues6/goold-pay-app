@@ -21,8 +21,10 @@ module.exports = {
         gray3: '#D5D5D5',
         gray4: '#D7D7D7',
         gray5: '#A0A0A0',
+        gray6: '#F9FAFB',
         
         green1: '#00CC5E',
+        green2: '#00B386',
 
         red1: '#EA0000',
         red2: '#FFE1E1'

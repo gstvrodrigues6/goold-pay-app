@@ -6,12 +6,12 @@ export default function AuthLayout() {
     <Stack
       screenOptions={{
         headerShown: false,
+        animation: 'none'
       }}>
       <Stack.Screen name="home" />
       <Stack.Screen
        options={{
           headerShown: false,
-          animation: 'none',
           presentation: 'transparentModal',
           gestureEnabled: true,
           contentStyle: { backgroundColor: 'transparent' },

@@ -1,7 +1,7 @@
 import { GooldIcon } from "@/presentation/assets/svg/goold-icon";
 import { LinkDefault } from "@/presentation/components/ui/link-default";
 import { Link } from "expo-router";
-import { Text, View } from "react-native";
+import { Image, Text, View } from "react-native";
 
 export default function HomeScreen() {
   return (
@@ -13,7 +13,12 @@ export default function HomeScreen() {
             | Pay
           </Text>
         </View>
-        <Text className="font-semibold text-3xl text-center pt-8">
+
+        <View className="py-8 items-center w-full">
+          <Image source={require('@/presentation/assets/images/intro-banner.png')} />
+        </View>
+
+        <Text className="font-semibold text-3xl text-center">
           <Text className="text-primary-dark">Goold Pay. </Text>
           O app feito para quem cria, engaja e fatura.
         </Text>
