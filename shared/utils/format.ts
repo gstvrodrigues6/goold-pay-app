@@ -27,9 +27,31 @@ export const formatPhone = (celular: string | undefined): string => {
   return cleaned;
 };
 
+export const formatBirthDate = (text: string | undefined): string => {
+  if (!text) return '';
+  
+  // Remove tudo que não for dígito e limita a 8 caracteres (dd/mm/yyyy)
+  const cleaned = text.replace(/\D/g, '').substring(0, 8);
+
+  // Aplica a máscara incrementalmente
+  if (cleaned.length > 4) {
+    return cleaned.replace(/^(\d{2})(\d{2})(\d{4}).*/, '$1/$2/$3');
+  }
+  if (cleaned.length > 2) {
+    return cleaned.replace(/^(\d{2})(\d{2}).*/, '$1/$2');
+  }
+
+  return cleaned;
+};
+
+
 export const cleanFormat = (value: string | undefined): string => {
   if (!value) return '';
   return value.replace(/\D/g, '');
+};
+
+export const removeAccents = (str: string) => {
+  return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 };
 
 export const formatTime = (timestamp: string) => {

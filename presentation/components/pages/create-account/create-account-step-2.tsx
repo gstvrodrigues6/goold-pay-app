@@ -1,10 +1,14 @@
 import { useCreateAccountStore } from '@/presentation/stores/create-account-store';
-import { useRef } from 'react';
+import { formatBirthDate } from '@/shared/utils/format';
+import { validateBirthDate } from '@/shared/utils/validate';
+import { useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Image, ScrollView, Text, TextInput, View } from 'react-native';
+import { AutocompleteInput } from '../../ui/auto-complete-input';
 import { Button } from '../../ui/button';
 import { InputField } from '../../ui/input-field';
 import { ProgressIndicator } from '../../ui/progress-indicator';
+import { SkeleteonText } from '../../ui/SkeleteonText';
 
 interface FormData {
   location: string;
@@ -15,17 +19,44 @@ interface FormData {
 
 export default function CreateAccountStep2({ step, incrementStep }: { step: number, incrementStep: () => void }) {
   const { formData, setFormData } = useCreateAccountStore();
+  const [loading, setLoading] = useState(false);
 
-  const {
-    formState: { errors },
-    control,
-  } = useForm<FormData>();
-  
   const locationRef = useRef<TextInput>(null);
   const birthDateRef = useRef<TextInput>(null);
   const managerCodeRef = useRef<TextInput>(null);
   const instagramRef = useRef<TextInput>(null);
 
+  const {
+    control,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<FormData>({
+    defaultValues: {
+      location: formData.location,
+      birthDate: formData.birthDate,
+      managerCode: formData.managerCode,
+      instagram: formData.instagram,
+    }
+  });
+
+  const onSubmit = async (data: FormData) => {
+    setLoading(true)
+    try {
+      setFormData({
+        location: data.location,
+        birthDate: data.birthDate,
+        managerCode: data.managerCode,
+        instagram: data.instagram,
+      })
+      incrementStep()
+    } catch (error) {
+      console.error('error', error);
+    } finally {
+      setLoading(false);
+    }
+  }
+  
   return (
     <View className='flex-1'>
       <ScrollView className='p-6'>
@@ -38,17 +69,27 @@ export default function CreateAccountStep2({ step, incrementStep }: { step: numb
 
         <View className="border-y border-border w-full py-4 my-4 flex-row items-center gap-4">
           <Image
-            source={{ uri: 'https://raw.githubusercontent.com/shadcn-ui/ui/main/apps/www/public/avatars/01.png' }}
+             source={ formData.profilePic ?
+              { uri: formData.profilePic } :
+              require("@/presentation/assets/images/avatar-placeholder.png")}
             className="w-24 h-24 rounded-full"
           />
           <View className='flex-1 gap-y-1'>
-            <Text className='font-semibold text-xl'>Joana ferreira</Text>
-            <Text className='text-sm'>São Paulo - SP</Text>
-            <Text className='text-sm'>@joanaferreira</Text>
+            <Text className='font-semibold text-xl'>{formData.fullName}</Text>
+            {watch('location') ? (
+              <Text className='text-sm'>{watch('location')}</Text>
+            ) : (
+              <SkeleteonText />
+            )}
+            {watch('instagram') ? (
+              <Text className='text-sm line-clamp-1'>{watch('instagram')}</Text>
+            ) : (
+              <SkeleteonText />
+            )}
           </View>
         </View>
 
-        <InputField
+        <AutocompleteInput
           ref={locationRef}
           control={control}
           rules={{
@@ -67,8 +108,10 @@ export default function CreateAccountStep2({ step, incrementStep }: { step: numb
           ref={birthDateRef}
           control={control}
           rules={{
-            required: 'Campo obrigatório',
+            validate: validateBirthDate,
           }}
+          maxLength={10}
+          onChangeText={formatBirthDate}
           name="birthDate"
           label="Data de nascimento "
           label2="(Obrigatorio)"
@@ -110,7 +153,7 @@ export default function CreateAccountStep2({ step, incrementStep }: { step: numb
       </ScrollView>
 
       <View className="gap-3 px-6 py-4 pb-8 border-t border-border">
-        <Button onPress={incrementStep}>
+        <Button loading={loading} onPress={handleSubmit(onSubmit)}>
           Prosseguir
         </Button>
       </View>

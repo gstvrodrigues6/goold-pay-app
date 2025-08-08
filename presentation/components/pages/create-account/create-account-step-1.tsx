@@ -1,6 +1,6 @@
 import { UploadIcon } from '@/presentation/assets/svg/upload-icon';
 import { useCreateAccountStore } from '@/presentation/stores/create-account-store';
-import { cleanFormat, formatCpf, formatPhone } from '@/shared/utils/format';
+import { cleanFormat, formatCpf, formatPhone, toTitleCase } from '@/shared/utils/format';
 import { selectImage } from '@/shared/utils/select-image';
 import { validateCpf } from '@/shared/utils/validate';
 import { useRef, useState } from 'react';
@@ -39,7 +39,7 @@ export default function CreateAccountStep1({ step, incrementStep }: { step: numb
   } = useForm<FormData>({
     defaultValues: {
       profilePic: formData.profilePic || '',
-      fullName: formData.fullName,
+      fullName: toTitleCase(formData.fullName),
       cpf: formatCpf(formData.cpf),
       email: formData.email,
       whatsapp: formatPhone(formData.whatsapp),
@@ -52,7 +52,7 @@ export default function CreateAccountStep1({ step, incrementStep }: { step: numb
     try {
       setFormData({
         profilePic: data.profilePic,
-        fullName: data.fullName,
+        fullName: toTitleCase(data.fullName),
         cpf: cleanFormat(data.cpf),
         email: data.email,
         whatsapp: cleanFormat(data.whatsapp),
@@ -105,6 +105,7 @@ export default function CreateAccountStep1({ step, incrementStep }: { step: numb
               }
             }
           }}
+          onChangeText={toTitleCase}
           name="fullName"
           label="Nome da completo "
           label2="(Obrigatorio)"
