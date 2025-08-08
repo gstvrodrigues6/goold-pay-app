@@ -1,5 +1,7 @@
 export const formatCpf = (value: string): string => {
-	const cleanValue = value.replace(/[^\d]/g, '');
+	 if (!value) return '';
+
+  const cleanValue = value.replace(/[^\d]/g, '');
 
 	if (cleanValue.length <= 3) return cleanValue;
 	if (cleanValue.length <= 6) return `${cleanValue.slice(0, 3)}.${cleanValue.slice(3)}`;

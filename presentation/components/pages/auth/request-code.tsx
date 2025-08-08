@@ -6,15 +6,16 @@ import { Button } from "../../ui/button"
 import { CpfInput } from "../../ui/cpf-input"
 
 interface FormData {
-  doc: string;
+  cpf: string;
 }
 
 export function RequestCode({ incrementStep }: { incrementStep: () => void }) {
   const {
+    control,
     formState: { errors },
   } = useForm<FormData>();
   
-  const docRef = useRef<TextInput>(null);
+  const cpfRef = useRef<TextInput>(null);
   
   return (
     <View className="p-6">
@@ -29,13 +30,15 @@ export function RequestCode({ incrementStep }: { incrementStep: () => void }) {
         </Text>
       </View>
       <CpfInput
-        ref={docRef}
+        ref={cpfRef}
+        control={control}
         label="CPF"
         label2="(Obrigatorio)"
+        name="cpf"
         placeholder="Insira seu CPF"
-        error={errors.doc}
+        error={errors.cpf}
         showSvg={true}
-        onSubmitEditing={() => docRef.current?.blur()}
+        onSubmitEditing={() => cpfRef.current?.blur()}
       />
      
       <View className="gap-8">

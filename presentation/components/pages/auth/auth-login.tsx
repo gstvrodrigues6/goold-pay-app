@@ -7,7 +7,7 @@ import { InputField } from "../../ui/input-field"
 import { PinInput } from "../../ui/pin-input"
 
 interface FormData {
-	doc: string;
+	cpf: string;
 	password: string;
 	code: string;
 }
@@ -18,17 +18,20 @@ export function AuthLogin({ incrementStep }: { incrementStep: () => void }) {
     control,
   } = useForm<FormData>();
   
-  const docRef = useRef<TextInput>(null);
+  const cpfRef = useRef<TextInput>(null);
   const passwordRef = useRef<TextInput>(null);
   const codeRef = useRef<TextInput>(null);
   
   return (
     <View className="p-6">
       <CpfInput
-        ref={docRef}
+        ref={cpfRef}
+        control={control}
         label="CPF"
         label2="(Obrigatorio)"
+        name="cpf"
         placeholder="Insira seu CPF"
+        error={errors.cpf}
         showSvg={true}
         onSubmitEditing={() => passwordRef.current?.focus()}
       />
