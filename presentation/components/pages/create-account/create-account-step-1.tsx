@@ -1,6 +1,9 @@
 import { UploadIcon } from '@/presentation/assets/svg/upload-icon';
 import { useCreateAccountStore } from '@/presentation/stores/create-account-store';
-import { useRef } from 'react';
+import { cleanFormat, formatCpf, formatPhone } from '@/shared/utils/format';
+import { selectImage } from '@/shared/utils/select-image';
+import { validateCpf } from '@/shared/utils/validate';
+import { useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Image, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { Button } from '../../ui/button';
@@ -16,19 +19,52 @@ interface FormData {
   whatsapp: string;
   password: string;
 }
+
 export default function CreateAccountStep1({ step, incrementStep }: { step: number, incrementStep: () => void }) {
   const { formData, setFormData } = useCreateAccountStore();
+  const [loading, setLoading] = useState(false);
 
-  const {
-    formState: { errors },
-    control,
-  } = useForm<FormData>();
-  
   const fullNameRef = useRef<TextInput>(null);
   const cpfRef = useRef<TextInput>(null);
   const emailRef = useRef<TextInput>(null);
   const whatsappRef = useRef<TextInput>(null);
   const passwordRef = useRef<TextInput>(null);
+
+  const {
+    control,
+    handleSubmit,
+    watch,
+    setValue,
+    formState: { errors }
+  } = useForm<FormData>({
+    defaultValues: {
+      profilePic: formData.profilePic || '',
+      fullName: formData.fullName,
+      cpf: formatCpf(formData.cpf),
+      email: formData.email,
+      whatsapp: formatPhone(formData.whatsapp),
+      password: formData.password,
+    }
+  });
+  
+  const onSubmit = async (data: FormData) => {
+    setLoading(true)
+    try {
+      setFormData({
+        profilePic: data.profilePic,
+        fullName: data.fullName,
+        cpf: cleanFormat(data.cpf),
+        email: data.email,
+        whatsapp: cleanFormat(data.whatsapp),
+        password: data.password,
+      })
+      incrementStep()
+    } catch (error) {
+      console.error('error', error);
+    } finally {
+      setLoading(false);
+    }
+  }
 
   return (
     <View className='flex-1'>
@@ -42,12 +78,14 @@ export default function CreateAccountStep1({ step, incrementStep }: { step: numb
 
         <View className="border-y border-border w-full py-4 my-4 flex-row items-center gap-4">
           <Image
-            source={{ uri: 'https://raw.githubusercontent.com/shadcn-ui/ui/main/apps/www/public/avatars/01.png' }}
+            source={ watch('profilePic') ?
+              { uri: watch('profilePic') } :
+              require("@/presentation/assets/images/avatar-placeholder.png")}
             className="w-24 h-24 rounded-full"
           />
           <View className='flex-1 gap-y-2'>
             <Text className='font-medium text-base'>Foto de perfil</Text>
-            <TouchableOpacity className="flex-row items-center justify-center gap-2 border border-border rounded-md px-4 py-3">
+            <TouchableOpacity onPress={() => selectImage("profilePic", setValue)} className="flex-row items-center justify-center gap-2 border border-border rounded-md px-4 py-3">
               <UploadIcon/>
               <Text className="font-medium">Substituir imagem</Text>
             </TouchableOpacity>
@@ -60,6 +98,12 @@ export default function CreateAccountStep1({ step, incrementStep }: { step: numb
           control={control}
           rules={{
             required: 'Campo obrigatório',
+            validate: {
+              minTwoNames: (value) => {
+                const names = value?.trim().split(/\s+/) || [];
+                return names.length >= 2 || 'Digite pelo menos dois nomes';
+              }
+            }
           }}
           name="fullName"
           label="Nome da completo "
@@ -73,9 +117,13 @@ export default function CreateAccountStep1({ step, incrementStep }: { step: numb
         <InputField
           ref={cpfRef}
           control={control}
+          maxLength={14}
           rules={{
             required: 'Campo obrigatório',
+            validate: (value) => validateCpf(value) || 'CPF inválido',
+						setValueAs: (value) => value?.replace(/[^\d]/g, ''),
           }}
+          onChangeText={formatCpf}
           name="cpf"
           label="CPF"
           label2="(Obrigatorio)"
@@ -90,6 +138,10 @@ export default function CreateAccountStep1({ step, incrementStep }: { step: numb
           control={control}
           rules={{
             required: 'Campo obrigatório',
+            pattern: {
+              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+              message: 'E-mail inválido'
+            }
           }}
           name="email"
           label="E-mail"
@@ -106,6 +158,8 @@ export default function CreateAccountStep1({ step, incrementStep }: { step: numb
           rules={{
             required: 'Campo obrigatório',
           }}
+          maxLength={15}
+          onChangeText={formatPhone}
           name="whatsapp"
           label="WhatsApp"
           label2="(Obrigatorio)"
@@ -135,7 +189,7 @@ export default function CreateAccountStep1({ step, incrementStep }: { step: numb
       </ScrollView>
 
       <View className="gap-3 px-6 py-4 pb-8 border-t border-border">
-        <Button onPress={incrementStep}>
+        <Button loading={loading} onPress={handleSubmit(onSubmit)}>
           Prosseguir
         </Button>
       </View>

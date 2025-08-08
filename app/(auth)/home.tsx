@@ -7,7 +7,7 @@ export default function HomeScreen() {
   return (
     <View className="h-screen bg-white px-3 py-14">
       <View className="mx-auto max-w-full w-[400px] flex-1  items-center">
-        <View className="flex-row items-center gap-2 pt-12">
+        <View className="flex-row items-center gap-2 pt-8">
           <GooldIcon/>
           <Text className="font-medium text-gray2 text-xl text-center">
             | Pay

@@ -8,7 +8,7 @@ type AccountState = {
   cpf: string;
   email: string;
   whatsapp: string;
-  password: string[];
+  password: string;
   location: string;
   birthDate: string;
   managerCode: string;

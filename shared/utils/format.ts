@@ -7,6 +7,31 @@ export const formatCpf = (value: string): string => {
 	return `${cleanValue.slice(0, 3)}.${cleanValue.slice(3, 6)}.${cleanValue.slice(6, 9)}-${cleanValue.slice(9, 11)}`;
 };
 
+export const formatPhone = (celular: string | undefined): string => {
+  if (!celular) return '';
+
+  // Remove tudo que não for dígito e limita a 11 caracteres
+  const cleaned = celular.replace(/\D/g, '').substring(0, 11);
+
+  // Aplica a máscara (XX) XXXXX-XXXX
+  if (cleaned.length >= 11) {
+    return cleaned.replace(/^(\d{2})(\d{5})(\d{4}).*/, '($1) $2-$3');
+  }
+  if (cleaned.length > 6) {
+    return cleaned.replace(/^(\d{2})(\d{4,5})/, '($1) $2');
+  }
+  if (cleaned.length > 2) {
+    return cleaned.replace(/^(\d{2})/, '($1) ');
+  }
+
+  return cleaned;
+};
+
+export const cleanFormat = (value: string | undefined): string => {
+  if (!value) return '';
+  return value.replace(/\D/g, '');
+};
+
 export const formatTime = (timestamp: string) => {
   return new Date(timestamp).toLocaleTimeString('pt-BR', {
     hour: '2-digit',
