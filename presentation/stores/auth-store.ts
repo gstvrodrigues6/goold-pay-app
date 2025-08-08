@@ -1,4 +1,4 @@
-import { User } from '@/domain/entities/user';
+import { User } from '@/domain/entities/user.entity';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';

@@ -1,5 +1,5 @@
-import { User } from "@/domain/entities/user";
-import type { AuthRepository } from "@/domain/repositories/auth-repository";
+import { User } from "@/domain/entities/user.entity";
+import type { AuthRepository } from "@/domain/repositories/auth.repository";
 import { ApiResponse, AuthTokens, LoginCredentials, RegisterData } from "@/shared/types/auth";
 import { apiClient } from "../api/api-client";
 

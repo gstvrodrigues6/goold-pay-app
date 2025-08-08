@@ -1,9 +1,9 @@
 "use client"
 
-import { useState } from "react"
+import { User } from "@/domain/entities/user.entity"
+import { AuthUseCases } from "@/domain/use-cases/auth.usecase"
 import { AuthRepositoryImpl } from "@/infrastructure/repositories/auth-repository-impl"
-import { AuthUseCases } from "@/domain/use-cases/auth-use-cases"
-import { User } from "@/domain/entities/user"
+import { useState } from "react"
 
 const authRepository = new AuthRepositoryImpl()
 const authUseCases = new AuthUseCases(authRepository)
