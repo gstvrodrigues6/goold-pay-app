@@ -80,7 +80,7 @@ export const PinInput = forwardRef<PinInputRef, PinInputProps>(
 					control={control}
 					name={name}
 					rules={rules}
-					render={({ field: { onChange, value = '' } }: { field: { onChange: (value: string) => void; value: string } }) => {
+					render={({ field: { onChange, value = '' } }) => {
 						const values = Array(numInputs)
 							.fill('')
 							.map((_, index) => value[index] || '');
@@ -110,7 +110,7 @@ export const PinInput = forwardRef<PinInputRef, PinInputProps>(
 					}}
 				/>
 
-				{error && <p className="text-red-500 text-xs mt-1">{error.message}</p>}
+				{error?.message && typeof error.message === 'string' && <Text className='text-xs text-red-500 font-normal'>{error?.message}</Text>}
 			</View>
 		);
 	},
