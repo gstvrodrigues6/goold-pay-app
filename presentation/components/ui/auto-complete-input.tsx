@@ -3,7 +3,7 @@ import { FormError } from '@/shared/types/form';
 import { removeAccents } from '@/shared/utils/format';
 import { forwardRef, useState } from 'react';
 import { Control, Controller, FieldValues, RegisterOptions } from 'react-hook-form';
-import { FlatList, Text, TextInput, TextInputProps, TouchableOpacity, View } from 'react-native';
+import { ScrollView, Text, TextInput, TextInputProps, TouchableOpacity, View } from 'react-native';
 
 interface AutocompleteInputProps<T extends FieldValues> extends Omit<TextInputProps, 'onChangeText'> {
   label: string;
@@ -35,10 +35,10 @@ export const AutocompleteInput = forwardRef<TextInput, AutocompleteInputProps<an
       const cleanedText = removeAccents(text.toLowerCase());
       
       const filtered = allCities.filter(city => {
-        const cleanedCityName = removeAccents(city.cidade.toLowerCase()); // Remove acentos e converte o nome da cidade
+        const cleanedCityName = removeAccents(city.cidade.toLowerCase());
         return cleanedCityName.startsWith(cleanedText);
-      });
-      
+      }).slice(0, 4);
+
       setFilteredCities(filtered);
       setShowSuggestions(true);
     } else {
@@ -78,18 +78,21 @@ export const AutocompleteInput = forwardRef<TextInput, AutocompleteInputProps<an
             />
             {showSuggestions && filteredCities.length > 0 && (
               <View className="absolute top-[80px] w-full bg-white border border-gray-300 rounded-md shadow-md z-10">
-                <FlatList
-                  data={filteredCities}
-                  keyExtractor={item => `${item.cidade}-${item.uf}`}
-                  renderItem={({ item }) => (
+                <ScrollView 
+                  nestedScrollEnabled={true}
+                  showsVerticalScrollIndicator={true}
+                  keyboardShouldPersistTaps="handled"
+                >
+                  {filteredCities.map((item) => (
                     <TouchableOpacity
+                      key={`${item.cidade}-${item.uf}`}
                       onPress={() => handleSelectCity(item, onChange)}
                       className="p-3 border-b border-gray-200"
                     >
                       <Text>{`${item.cidade} - ${item.uf}`}</Text>
                     </TouchableOpacity>
-                  )}
-                />
+                  ))}
+                </ScrollView>
               </View>
             )}
           </>
