@@ -1,4 +1,4 @@
-import { useRef } from "react"
+import { useRef, useState } from "react"
 import { useForm } from "react-hook-form"
 import { Text, TextInput, View } from "react-native"
 import { Button } from "../../ui/button"
@@ -13,15 +13,30 @@ interface FormData {
 }
 
 export function AuthLogin({ incrementStep }: { incrementStep: () => void }) {
-  const {
-    formState: { errors },
-    control,
-  } = useForm<FormData>();
+  const [loading, setLoading] = useState(false);
   
   const cpfRef = useRef<TextInput>(null);
   const passwordRef = useRef<TextInput>(null);
   const codeRef = useRef<TextInput>(null);
-  
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>();
+
+  const onSubmit = async (data: FormData) => {
+    setLoading(true)
+    try {
+      console.log(data)
+
+    } catch (error) {
+      console.error('error', error);
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return (
     <View className="p-6">
       <CpfInput
@@ -29,6 +44,9 @@ export function AuthLogin({ incrementStep }: { incrementStep: () => void }) {
         control={control}
         label="CPF"
         label2="(Obrigatorio)"
+        rules={{
+          required: 'Campo obrigatório',
+        }}
         name="cpf"
         placeholder="Insira seu CPF"
         error={errors.cpf}
@@ -67,8 +85,8 @@ export function AuthLogin({ incrementStep }: { incrementStep: () => void }) {
         onSubmitEditing={() => codeRef.current?.blur()}
       />
 
-      <View className="gap-3">
-        <Button>
+      <View className="gap-3 pt-5">
+        <Button loading={loading} onPress={handleSubmit(onSubmit)}>
           Acessar conta
         </Button>
 

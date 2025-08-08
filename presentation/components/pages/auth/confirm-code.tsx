@@ -1,21 +1,37 @@
 import { MailPictureIcon } from "@/presentation/assets/svg/mail-picture-icon"
-import React, { useRef } from "react"
+import React, { useRef, useState } from "react"
 import { useForm } from "react-hook-form"
 import { Text, TextInput, TouchableOpacity, View } from "react-native"
 import { Button } from "../../ui/button"
 import { PinInput } from "../../ui/pin-input"
 
 interface FormData {
-	password: string;
+	confirmCode: string;
 }
 export function ConfirmCode({ incrementStep }: { incrementStep: () => void }) {
+  const [loading, setLoading] = useState(false);
+
+  const confirmCodeRef = useRef<TextInput>(null);
+
   const {
-    formState: { errors },
     control,
+    handleSubmit,
+    formState: { errors },
   } = useForm<FormData>();
   
-  const passwordRef = useRef<TextInput>(null);
-  
+  const onSubmit = async (data: FormData) => {
+    setLoading(true)
+    try {
+      console.log(data)
+
+      incrementStep()
+    } catch (error) {
+      console.error('error', error);
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return (
     <View className="">
       <View className="relative h-[calc(100%-117px)] flex flex-col gap-3 items-center overflow-y-auto p-6 pt-10">
@@ -31,17 +47,17 @@ export function ConfirmCode({ incrementStep }: { incrementStep: () => void }) {
         </View>
 
         <PinInput
-          ref={passwordRef}
+          ref={confirmCodeRef}
           eyeBtn={false}
           numInputs={5}
           control={control}
-          name="password"
-          error={errors.password}
+          name="confirmCode"
+          error={errors.confirmCode}
           rules={{
             required: 'Campo obrigatório',
             validate: (value) => {
-              if (!value || value.length < 6) {
-                return 'Senha deve ter 6 dígitos';
+              if (!value || value.length < 5) {
+                return 'Senha deve ter 5 dígitos';
               }
               return true;
             },
@@ -55,7 +71,7 @@ export function ConfirmCode({ incrementStep }: { incrementStep: () => void }) {
       </View>
 
       <View className="gap-3 px-6 py-4 border-t border-border">
-        <Button onPress={incrementStep}>
+        <Button loading={loading} onPress={handleSubmit(onSubmit)}>
           Confirmar código
         </Button>
 

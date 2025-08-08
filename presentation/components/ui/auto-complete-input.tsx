@@ -52,7 +52,7 @@ export const AutocompleteInput = forwardRef<TextInput, AutocompleteInputProps<an
   };
 
   return (
-    <View className='pb-6'>
+    <View className='pb-5'>
       {(label || label2) && (
         <View className='flex-row items-center pb-1'>
           {label && <Text className="font-medium text-base">{label}</Text>}

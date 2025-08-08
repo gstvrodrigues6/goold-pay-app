@@ -60,12 +60,12 @@ export const PinInput = forwardRef<PinInputRef, PinInputProps>(
 		};
 
 		return (
-			<View className="pb-2 w-full">
+			<View className="pb-5">
 				<View className="flex-row items-center justify-between pb-1">
 					{(label || label2) && (
-						<View className='flex-row items-center'>
-							{label && <Text className="text-base font-medium">{label}</Text>}
-							{label2 && <Text className="text-sm font-normal"> {label2}</Text>}
+						<View className='flex-row items-center pb-1'>
+							{label && <Text className="font-medium text-base">{label}</Text>}
+							{label2 && <Text className="font-normal text-sm"> {label2}</Text>}
 						</View>
 					)}
 

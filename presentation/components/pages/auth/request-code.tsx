@@ -1,5 +1,6 @@
 import { Padlock2Icon } from "@/presentation/assets/svg/padlock-2-icon"
-import React, { useRef } from "react"
+import { validateCpf } from "@/shared/utils/validate"
+import React, { useRef, useState } from "react"
 import { useForm } from "react-hook-form"
 import { Text, TextInput, View } from "react-native"
 import { Button } from "../../ui/button"
@@ -10,13 +11,29 @@ interface FormData {
 }
 
 export function RequestCode({ incrementStep }: { incrementStep: () => void }) {
+  const [loading, setLoading] = useState(false);
+
+  const cpfRef = useRef<TextInput>(null);
+
   const {
     control,
+    handleSubmit,
     formState: { errors },
   } = useForm<FormData>();
-  
-  const cpfRef = useRef<TextInput>(null);
-  
+
+  const onSubmit = async (data: FormData) => {
+    setLoading(true)
+    try {
+      console.log(data)
+
+      incrementStep()
+    } catch (error) {
+      console.error('error', error);
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return (
     <View className="p-6">
       <View className="items-center">
@@ -34,6 +51,11 @@ export function RequestCode({ incrementStep }: { incrementStep: () => void }) {
         control={control}
         label="CPF"
         label2="(Obrigatorio)"
+        rules={{
+          required: 'Campo obrigatório',
+          validate: (value) => validateCpf(value) || 'CPF inválido',
+          setValueAs: (value) => value?.replace(/[^\d]/g, ''),
+        }}
         name="cpf"
         placeholder="Insira seu CPF"
         error={errors.cpf}
@@ -42,7 +64,7 @@ export function RequestCode({ incrementStep }: { incrementStep: () => void }) {
       />
      
       <View className="gap-8">
-        <Button onPress={incrementStep}>
+        <Button loading={loading} onPress={handleSubmit(onSubmit)}>
           Recuperar senha
         </Button>
 
