@@ -1,43 +1,62 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 class ApiClient {
   private baseURL: string
   private token: string | null = null
 
   constructor(baseURL: string) {
     this.baseURL = baseURL
-    this.token = typeof window !== "undefined" ? localStorage.getItem("accessToken") : null
+    this.loadToken();
   }
 
-  setToken(token: string) {
-    this.token = token
-    if (typeof window !== "undefined") {
-      localStorage.setItem("accessToken", token)
+  private async loadToken() {
+    try {
+      const accessToken = await AsyncStorage.getItem("accessToken");
+      this.token = accessToken;
+    } catch (error) {
+      console.error("Failed to load access token from storage", error);
     }
   }
 
-  removeToken() {
-    this.token = null
-    if (typeof window !== "undefined") {
-      localStorage.removeItem("accessToken")
-      localStorage.removeItem("refreshToken")
+  async setToken(token: string) {
+    this.token = token;
+    try {
+      await AsyncStorage.setItem("accessToken", token);
+    } catch (error) {
+      console.error("Failed to save access token to storage", error);
+    }
+  }
+
+  async removeToken() {
+    this.token = null;
+    try {
+      await AsyncStorage.removeItem("accessToken");
+      await AsyncStorage.removeItem("refreshToken");
+    } catch (error) {
+      console.error("Failed to remove tokens from storage", error);
     }
   }
 
   private async request<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
     const url = `${this.baseURL}${endpoint}`
 
-    const headers: HeadersInit = {
+    const requestHeaders: Record<string, string> = {
       "Content-Type": "application/json",
-      ...options.headers,
+      ...options.headers as Record<string, string>,
+    }
+
+    if (!this.token) {
+      await this.loadToken();
     }
 
     if (this.token) {
-      headers.values = `Bearer ${this.token}`
+      requestHeaders.Authorization = `Bearer ${this.token}`;
     }
 
     try {
       const response = await fetch(url, {
         ...options,
-        headers,
+        headers: requestHeaders,
       })
 
       if (!response.ok) {
@@ -74,4 +93,4 @@ class ApiClient {
   }
 }
 
-export const apiClient = new ApiClient(process.env.NEXT_PUBLIC_API_URL || "https://jsonplaceholder.typicode.com")
+export const apiClient = new ApiClient("http://localhost:8084")

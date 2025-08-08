@@ -8,7 +8,6 @@ export class AuthRepositoryImpl implements AuthRepository {
     // Simulando uma resposta de API real
     const response = await apiClient.post<ApiResponse<{ user: User; tokens: AuthTokens }>>("/auth/login", credentials)
 
-    // Para demonstração, vamos simular uma resposta
     const mockResponse = {
       user: {
         id: "1",
@@ -29,7 +28,6 @@ export class AuthRepositoryImpl implements AuthRepository {
   async register(data: RegisterData): Promise<{ user: User; tokens: AuthTokens }> {
     const response = await apiClient.post<ApiResponse<{ user: User; tokens: AuthTokens }>>("/auth/register", data)
 
-    // Mock response
     const mockResponse = {
       user: {
         id: "1",
@@ -55,7 +53,6 @@ export class AuthRepositoryImpl implements AuthRepository {
   async getCurrentUser(): Promise<User> {
     const response = await apiClient.get<ApiResponse<User>>("/auth/me")
 
-    // Mock response
     return {
       id: "1",
       name: "John Doe",
@@ -68,7 +65,6 @@ export class AuthRepositoryImpl implements AuthRepository {
     const refreshToken = typeof window !== "undefined" ? localStorage.getItem("refreshToken") : null
     const response = await apiClient.post<ApiResponse<AuthTokens>>("/auth/refresh", { refreshToken })
 
-    // Mock response
     const mockTokens = {
       accessToken: "new-mock-access-token",
       refreshToken: "new-mock-refresh-token",
