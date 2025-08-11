@@ -28,16 +28,11 @@ export class AuthRepositoryImpl implements AuthRepository {
       },
     }
 
-    await AsyncStorage.setItem("accessToken", mockResponse.tokens.accessToken);
-    await AsyncStorage.setItem("refreshToken", mockResponse.tokens.refreshToken);
-
     return mockResponse
   }
 
   async logout(): Promise<void> {
     await api.post("/auth/logout")
-    await AsyncStorage.removeItem("accessToken");
-    await AsyncStorage.removeItem("refreshToken");
   }
 
   async refreshToken(): Promise<AuthTokens> {

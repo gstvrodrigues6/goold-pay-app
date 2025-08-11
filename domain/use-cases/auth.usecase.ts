@@ -12,4 +12,8 @@ export class AuthUseCases {
   async logout() {
     return await this.authRepository.logout()
   }
+
+  async refreshToken() {
+    return await this.authRepository.refreshToken()
+  }
 }

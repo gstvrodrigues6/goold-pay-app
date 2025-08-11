@@ -1,4 +1,5 @@
-import { useRef, useState } from "react"
+import { useAuth } from "@/presentation/hooks/use-auth"
+import { useRef } from "react"
 import { useForm } from "react-hook-form"
 import { Text, TextInput, View } from "react-native"
 import { Button } from "../../ui/button"
@@ -13,7 +14,7 @@ interface FormData {
 }
 
 export function AuthLogin({ incrementStep }: { incrementStep: () => void }) {
-  const [loading, setLoading] = useState(false);
+  const { login, isLoading } = useAuth()
   
   const cpfRef = useRef<TextInput>(null);
   const passwordRef = useRef<TextInput>(null);
@@ -26,14 +27,11 @@ export function AuthLogin({ incrementStep }: { incrementStep: () => void }) {
   } = useForm<FormData>();
 
   const onSubmit = async (data: FormData) => {
-    setLoading(true)
     try {
-      console.log(data)
-
-    } catch (error) {
-      console.error('error', error);
-    } finally {
-      setLoading(false);
+      const result = await login(data.cpf, data.password, data.code)
+      console.log("Sucesso", `Bem-vindo(a) ${result.account.fullName}`)
+    } catch {
+      console.log("Erro", "Não foi possível entrar")
     }
   }
 
@@ -86,7 +84,7 @@ export function AuthLogin({ incrementStep }: { incrementStep: () => void }) {
       />
 
       <View className="gap-3 pt-5">
-        <Button loading={loading} onPress={handleSubmit(onSubmit)}>
+        <Button loading={isLoading} onPress={handleSubmit(onSubmit)}>
           Acessar conta
         </Button>
 
