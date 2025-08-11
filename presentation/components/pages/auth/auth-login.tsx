@@ -1,5 +1,4 @@
 import { useAuth } from "@/presentation/hooks/use-auth"
-import { router } from "expo-router"
 import { useRef } from "react"
 import { useForm } from "react-hook-form"
 import { Text, TextInput, View } from "react-native"
