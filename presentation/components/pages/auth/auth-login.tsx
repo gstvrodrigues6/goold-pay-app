@@ -30,8 +30,8 @@ export function AuthLogin({ incrementStep }: { incrementStep: () => void }) {
     try {
       const result = await login(data.cpf, data.password, data.code)
       console.log("Sucesso", `Bem-vindo(a) ${result.account.fullName}`)
-    } catch {
-      console.log("Erro", "Não foi possível entrar")
+    } catch(error) {
+      console.log("Erro", error)
     }
   }
 

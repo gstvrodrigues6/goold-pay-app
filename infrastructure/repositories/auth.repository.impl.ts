@@ -6,7 +6,7 @@ import { api } from "../http/axios.config";
 
 export class AuthRepositoryImpl implements AuthRepository {
   async login(credentials: LoginCredentials): Promise<{ account: Account; tokens: AuthTokens }> {
-    await api.post("/auth/login", credentials);
+    console.log(credentials)
 
     const mockResponse = {
       account: {
@@ -37,7 +37,6 @@ export class AuthRepositoryImpl implements AuthRepository {
 
   async refreshToken(): Promise<AuthTokens> {
     const refreshToken = await AsyncStorage.getItem("refreshToken");
-    await api.post("/auth/refresh", { refreshToken });
 
     const mockTokens = {
       accessToken: "new-mock-access-token",
