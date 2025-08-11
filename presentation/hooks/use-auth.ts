@@ -2,6 +2,7 @@ import { AuthUseCases } from "@/domain/use-cases/auth.usecase"
 import { AuthRepositoryImpl } from "@/infrastructure/repositories/auth.repository.impl"
 import { router } from "expo-router"
 import { useState } from "react"
+import Toast from "react-native-toast-message"
 import { useAuthStore } from "../stores/auth-store"
 
 const authRepository = new AuthRepositoryImpl()
@@ -16,13 +17,24 @@ export function useAuth() {
 
     try {
       const result = await authUseCases.login({ cpf, password, code })
-      setMyAccount(result.account)
-      setTokens(result.tokens)
-      router.replace('/(protected)');
-      return result
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : "Erro ao fazer login"
-      throw errorMessage
+      if (result && result.tokens) {
+        setMyAccount(result.account)
+        setTokens(result.tokens)
+        router.replace('/(protected)');
+      } else {
+        Toast.show({
+					type: 'erroToast',
+					text1: 'Credenciais inválidas!',
+					visibilityTime: 3000,
+				});
+      }
+    } catch (error) {
+      Toast.show({
+        type: 'erroToast',
+        text1: 'Credenciais inválidas!',
+        visibilityTime: 3000,
+      });
+      console.error('Login error:', error);
     } finally {
       setIsLoading(false) 
     }
