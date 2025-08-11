@@ -11,7 +11,7 @@ export class AuthRepositoryImpl implements AuthRepository {
     const mockResponse = {
       account: {
         id: "1",
-        profilePic: 'https://unsplash.com/pt-br/fotografias/closeup-photography-of-woman-smiling-mEZ3PoFGs_k',
+        profilePic: 'https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?w=100&h=100&fit=crop&crop=face',
         fullName: "John Doe",
         cpf: '805.494.230-36',
         email: 'jhondoe@mail.com',

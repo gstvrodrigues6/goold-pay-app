@@ -15,13 +15,11 @@ module.exports = {
         'secondary-dark': '#FFEEF2',
 
         border: '#D7D7D7',
+        border2: '#FFEDF0',
 
         gray1: '#7D7D7D',
         gray2: '#767676',
         gray3: '#D5D5D5',
-        gray4: '#D7D7D7',
-        gray5: '#A0A0A0',
-        gray6: '#F9FAFB',
         
         green1: '#00CC5E',
         green2: '#00B386',
