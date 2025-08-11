@@ -1,10 +1,12 @@
 import '@/global.css';
+import { toastConfig } from '@/shared/utils/toastConfig';
 
 import { useFonts } from 'expo-font';
 import { SplashScreen, Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
+import Toast from 'react-native-toast-message';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -33,6 +35,7 @@ export default function RootLayout() {
         <Stack.Screen name="(protected)" options={{ headerShown: false, animation: 'none' }} />
         <Stack.Screen name="+not-found" options={{ headerShown: false, animation: 'none' }} />
       </Stack>
+      <Toast config={toastConfig} />
       <StatusBar style="auto" />
     </>
   );

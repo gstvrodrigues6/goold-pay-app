@@ -1,5 +1,6 @@
 import { AuthUseCases } from "@/domain/use-cases/auth.usecase"
 import { AuthRepositoryImpl } from "@/infrastructure/repositories/auth.repository.impl"
+import { router } from "expo-router"
 import { useState } from "react"
 import { useAuthStore } from "../stores/auth-store"
 
@@ -9,21 +10,19 @@ const authUseCases = new AuthUseCases(authRepository)
 export function useAuth() {
   const { myAccount, tokens, setMyAccount, setTokens, clearAuth } = useAuthStore()
   const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
 
   const login = async (cpf: string, password: string, code: string) => {
     setIsLoading(true)
-    setError(null)
 
     try {
       const result = await authUseCases.login({ cpf, password, code })
       setMyAccount(result.account)
       setTokens(result.tokens)
+      router.replace('/(protected)');
       return result
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : "Erro ao fazer login"
-      setError(errorMessage)
-      throw err
+      throw errorMessage
     } finally {
       setIsLoading(false) 
     }
@@ -46,7 +45,6 @@ export function useAuth() {
     myAccount,
     tokens,
     isLoading,
-    error,
     login,
     logout,
     isAuthenticated: !!tokens?.accessToken,

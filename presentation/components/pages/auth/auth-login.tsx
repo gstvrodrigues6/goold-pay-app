@@ -1,4 +1,5 @@
 import { useAuth } from "@/presentation/hooks/use-auth"
+import { router } from "expo-router"
 import { useRef } from "react"
 import { useForm } from "react-hook-form"
 import { Text, TextInput, View } from "react-native"
@@ -27,12 +28,7 @@ export function AuthLogin({ incrementStep }: { incrementStep: () => void }) {
   } = useForm<FormData>();
 
   const onSubmit = async (data: FormData) => {
-    try {
-      const result = await login(data.cpf, data.password, data.code)
-      console.log("Sucesso", `Bem-vindo(a) ${result.account.fullName}`)
-    } catch(error) {
-      console.log("Erro", error)
-    }
+    await login(data.cpf, data.password, data.code)
   }
 
   return (
