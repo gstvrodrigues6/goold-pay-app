@@ -21,7 +21,7 @@ const initialFormData: AccountState = {
   cpf: '',
   email: '',
   whatsapp: '',
-  password: ['', '', '', ''],
+  password: '',
   location: '',
   birthDate: '',
   managerCode: '',

@@ -1,10 +1,11 @@
-import { AuthTokens, LoginCredentials, User } from "@/shared/types/auth";
+import { AuthTokens, LoginCredentials } from "@/shared/types/auth";
+import { Account } from "../entities/account.entity";
 import { AuthRepository } from "../repositories/auth.repository";
 
 export class AuthUseCases {
   constructor(private authRepository: AuthRepository) {}
 
-  async login(credentials: LoginCredentials): Promise<{ user: User; tokens: AuthTokens }> {
+  async login(credentials: LoginCredentials): Promise<{ account: Account; tokens: AuthTokens }> {
     return await this.authRepository.login(credentials)
   }
 

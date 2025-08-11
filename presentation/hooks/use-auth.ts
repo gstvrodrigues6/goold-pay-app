@@ -2,7 +2,7 @@
 
 import { User } from "@/domain/entities/user.entity"
 import { AuthUseCases } from "@/domain/use-cases/auth.usecase"
-import { AuthRepositoryImpl } from "@/infrastructure/repositories/auth-repository-impl"
+import { AuthRepositoryImpl } from "@/infrastructure/repositories/auth.repository.impl"
 import { useState } from "react"
 
 const authRepository = new AuthRepositoryImpl()
