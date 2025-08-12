@@ -1,9 +1,13 @@
 import { DownloadIcon } from "@/presentation/assets/svg/download-icon"
 import { mockTransactions } from "@/presentation/mock/transactions"
+import { useState } from "react"
 import { Text, TouchableOpacity, View } from "react-native"
 import { TransactionIcon } from "../../business/transaction-icon"
+import { ModalTransaction } from "./modal-transaction"
 
 export default function TransactionsList() {
+  const [isOpen, setIsOpen] = useState(false)
+
   return (
     <View className="py-6 gap-5">
       <View className="flex-row items-center justify-between">
@@ -34,7 +38,7 @@ export default function TransactionsList() {
 
       <View>
         {mockTransactions.map((transaction) => (
-          <TouchableOpacity key={transaction.id} className="border-t border-border flex-row items-center gap-3 py-3">
+          <TouchableOpacity onPress={() => setIsOpen(true)} key={transaction.id} className="border-t border-border flex-row items-center gap-3 py-3">
             <TransactionIcon type={transaction.icon} />
 
             <View className="flex-1">
@@ -48,6 +52,8 @@ export default function TransactionsList() {
               </Text>
               <Text className="text-base">{transaction.category}</Text>
             </View>
+
+            <ModalTransaction isOpen={isOpen} onClose={() => setIsOpen(false)}/>
           </TouchableOpacity>
         ))}
       </View>

@@ -1,7 +1,7 @@
-import Svg, { G, Path } from 'react-native-svg';
+import Svg, { G, Path, SvgProps } from 'react-native-svg';
 
-export const ToastSuccessIcon = (props) => (
-	<Svg width={24} height={24} viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" {...props}>
+export const ToastSuccessIcon = (props: SvgProps) => (
+	<Svg width={24} height={24} viewBox="0 0 512 512" {...props}>
 		<G strokeWidth={0} />
 		<G strokeLinecap="round" strokeLinejoin="round" />
 		<Path

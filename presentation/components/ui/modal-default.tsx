@@ -1,17 +1,17 @@
 import { ReactNode } from "react"
 import { Modal, TouchableOpacity, TouchableWithoutFeedback, View } from "react-native"
 
-interface ModalBottomProps {
+interface ModalefaultProps {
   isOpen: boolean
   onClose: () => void
   children: ReactNode
 }
 
-export function ModalBottom({
+export function ModalDefault({
   isOpen,
   onClose,
   children
-}: ModalBottomProps) {
+}: ModalefaultProps) {
   return (
     <Modal 
       transparent={true}
@@ -25,7 +25,7 @@ export function ModalBottom({
         activeOpacity={0.7}
       >
         <TouchableWithoutFeedback onPress={(e) => e.stopPropagation()}>
-          <View className="bg-white rounded-t-xl w-full" style={{ minHeight: 540 }}>
+          <View className="bg-white w-full h-full">
             {children}
           </View>
         </TouchableWithoutFeedback>
