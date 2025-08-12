@@ -36,7 +36,7 @@ export default function TransactionsList() {
         </View>
       </View>
 
-      <View>
+      <View className="pb-20">
         {mockTransactions.map((transaction) => (
           <TouchableOpacity onPress={() => setIsOpen(true)} key={transaction.id} className="border-t border-border flex-row items-center gap-3 py-3">
             <TransactionIcon type={transaction.icon} />
@@ -56,6 +56,7 @@ export default function TransactionsList() {
             <ModalTransaction isOpen={isOpen} onClose={() => setIsOpen(false)}/>
           </TouchableOpacity>
         ))}
+        
       </View>
     </View>
   )
