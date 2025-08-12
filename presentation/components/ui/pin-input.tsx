@@ -99,7 +99,16 @@ export const PinInput = forwardRef<PinInputRef, PinInputProps>(
 										onKeyPress={({ nativeEvent }) => 
 											handleKeyPress(index, nativeEvent.key, values, onChange)
 										}
-										className="flex-1 text-center aspect-square text-xl font-semibold border border-border rounded-lg bg-[#F6F4F1] focus:bg-white focus:ring-1 focus:ring-primarycolor focus:outline-none transition-all"
+										style={{
+											flex: 1,
+											textAlign: 'center',
+											fontSize: 20,
+											borderWidth: 1,
+											borderColor: '#D7D7D7',
+											borderRadius: 8,
+											backgroundColor: '#F6F4F1',
+										}}
+										className="font-semibold"
 										maxLength={1}
 										inputMode="numeric"
 										keyboardType="numeric"
