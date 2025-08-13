@@ -7,7 +7,7 @@ export default function HomeScreen() {
   return (
     <SafeAreaView className='bg-white'>
       <ScrollView>
-        <View className="mx-auto max-w-full px-4 py-8 w-[400px] flex-1  items-center">
+        <View className="px-4 py-14">
           <View className="flex-row items-center gap-2 pt-8">
             <GooldIcon/>
             <Text className="font-medium text-gray2 text-xl text-center">
