@@ -100,8 +100,11 @@ export const PinInput = forwardRef<PinInputRef, PinInputProps>(
 											handleKeyPress(index, nativeEvent.key, values, onChange)
 										}
 										style={{
+											aspectRatio: '1 / 1',
 											flex: 1,
 											textAlign: 'center',
+											justifyContent: 'center',
+											alignItems: 'center',
 											fontSize: 20,
 											borderWidth: 1,
 											borderColor: '#D7D7D7',

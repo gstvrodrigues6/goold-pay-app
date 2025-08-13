@@ -5,8 +5,8 @@ import { Image, ScrollView, Text, View } from "react-native";
 
 export default function HomeScreen() {
   return (
-    <ScrollView className=" bg-white px-4 py-14">
-      <View className="mx-auto max-w-full w-[400px] flex-1  items-center">
+    <ScrollView className="bg-white">
+      <View className="mx-auto max-w-full px-4 py-8 w-[400px] flex-1  items-center">
         <View className="flex-row items-center gap-2 pt-8">
           <GooldIcon/>
           <Text className="font-medium text-gray2 text-xl text-center">
@@ -15,7 +15,7 @@ export default function HomeScreen() {
         </View>
 
         <View className="py-8 items-center w-full">
-          <Image source={require('@/presentation/assets/images/intro-banner.png')} />
+          <Image resizeMode="contain" style={{ width: '100%' }} source={require('@/presentation/assets/images/intro-banner.png')} />
         </View>
 
         <Text className="font-semibold text-3xl text-center">

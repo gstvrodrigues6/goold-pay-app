@@ -9,26 +9,28 @@ import { DocumentIcon } from '@/presentation/assets/svg/document-icon';
 export default function CreateAccountStep3({ step, incrementStep }: { step: number, incrementStep: () => void }) {
   return (
     <View className='flex-1'>
-      <ScrollView className='p-6'>
-        <ProgressIndicator currentStep={step} totalSteps={3}/>
+      <ScrollView>
+        <View className='p-6'>
+          <ProgressIndicator currentStep={step} totalSteps={3}/>
 
-        <Text className="text-2xl font-semibold text-center">Vamos verificá-la</Text>
-        <Text className="text-base font-medium text-center">
-          Siga os 4 passos simples abaixo
-        </Text>
+          <Text className="text-2xl font-semibold text-center">Vamos verificá-la</Text>
+          <Text className="text-base font-medium text-center">
+            Siga os 4 passos simples abaixo
+          </Text>
 
-        <View className='py-5 gap-6'>
-          {steps.map(((step) => (
-            <View key={step.id} className='flex-row gap-4 items-center'>
-              <View className='w-14 h-14 rounded-full bg-gray-50 border border-border items-center justify-center'>
-                {step.icon}
+          <View className='py-5 gap-6'>
+            {steps.map(((step) => (
+              <View key={step.id} className='flex-row gap-4 items-center'>
+                <View className='w-14 h-14 rounded-full bg-gray-50 border border-border items-center justify-center'>
+                  {step.icon}
+                </View>
+                <View>
+                  <Text className='font-semibold text-lg'>{step.title}</Text>
+                  <Text>{step.text}</Text>
+                </View>
               </View>
-              <View>
-                <Text className='font-semibold text-lg'>{step.title}</Text>
-                <Text>{step.text}</Text>
-              </View>
-            </View>
-          )))}
+            )))}
+          </View>
         </View>
       </ScrollView>
 
