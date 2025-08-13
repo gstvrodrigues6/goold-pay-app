@@ -18,7 +18,7 @@ export default function CreateAccountScreen() {
 
   return (
     <SafeAreaView className="flex-1 bg-white">
-      <View className="p-5 pt-8 border-b border-border flex-row justify-between">
+      <View className="p-5 z-10 pt-8 border-b border-border flex-row justify-between">
         <View className="flex-row items-center gap-3">
           <TouchableOpacity
             onPress={() => {
