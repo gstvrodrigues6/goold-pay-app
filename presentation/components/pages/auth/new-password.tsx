@@ -46,6 +46,7 @@ export function NewPassword({ incrementStep }: { incrementStep: () => void }) {
               return true;
             },
           }}
+          onSubmitEditing={() => passwordRef.current?.focus()}
         />
 
         <PinInput
@@ -64,6 +65,7 @@ export function NewPassword({ incrementStep }: { incrementStep: () => void }) {
               return true;
             },
           }}
+          onSubmitEditing={() => passwordRef.current?.blur()}
         />
       </View>
 

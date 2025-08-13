@@ -62,6 +62,7 @@ export function ConfirmCode({ incrementStep }: { incrementStep: () => void }) {
               return true;
             },
           }}
+          onSubmitEditing={() => confirmCodeRef.current?.blur()}
         />
 
         <Text className="text-sm font-medium text-center">

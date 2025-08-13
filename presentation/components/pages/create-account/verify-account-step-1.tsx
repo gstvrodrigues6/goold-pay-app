@@ -48,6 +48,7 @@ export default function VerifyAccountStep1({ incrementStep }: { incrementStep: (
                 return true;
               },
             }}
+            onSubmitEditing={() => passwordRef.current?.blur()}
           />
 
           <Text className="text-sm font-medium text-center">
