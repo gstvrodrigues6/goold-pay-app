@@ -1,5 +1,5 @@
 import { PadlockIcon } from "@/presentation/assets/svg/padlock-icon"
-import React, { useRef } from "react"
+import React, { useRef, useState } from "react"
 import { useForm } from "react-hook-form"
 import { Text, TextInput, View } from "react-native"
 import { Button } from "../../ui/button"
@@ -10,13 +10,29 @@ interface FormData {
   confirm: string;
 }
 export function NewPassword({ incrementStep }: { incrementStep: () => void }) {
-  const {
-    formState: { errors },
-    control,
-  } = useForm<FormData>();
+  const [loading, setLoading] = useState(false);
   
   const passwordRef = useRef<TextInput>(null);
   const confirmRef = useRef<TextInput>(null);
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors }
+  } = useForm<FormData>();
+  
+  const onSubmit = async (data: FormData) => {
+    setLoading(true)
+    try {
+      console.log(data)
+
+      incrementStep()
+    } catch (error) {
+      console.error('error', error);
+    } finally {
+      setLoading(false);
+    }
+  }
   
   return (
     <View className="">
@@ -67,7 +83,7 @@ export function NewPassword({ incrementStep }: { incrementStep: () => void }) {
       </View>
 
       <View className="gap-3 px-6 py-4 border-t border-border">
-        <Button onPress={incrementStep}>
+        <Button loading={loading} onPress={handleSubmit(onSubmit)}>
           Confirmar nova senha
         </Button>
       </View>
