@@ -65,7 +65,6 @@ export function NewPassword({ incrementStep }: { incrementStep: () => void }) {
               return true;
             },
           }}
-          onSubmitEditing={() => passwordRef.current?.blur()}
         />
       </View>
 
