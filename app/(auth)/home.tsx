@@ -1,7 +1,8 @@
 import { GooldIcon } from "@/presentation/assets/svg/goold-icon";
 import { LinkDefault } from "@/presentation/components/ui/link-default";
 import { Link } from "expo-router";
-import { Image, SafeAreaView, ScrollView, Text, View } from "react-native";
+import { Image, ScrollView, Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function HomeScreen() {
   return (

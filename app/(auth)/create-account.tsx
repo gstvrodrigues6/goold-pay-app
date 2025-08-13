@@ -10,7 +10,8 @@ import VerifyAccountStep4 from '@/presentation/components/pages/create-account/v
 import VerifyAccountStep5 from '@/presentation/components/pages/create-account/verify-account-step-5';
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
-import { SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function CreateAccountScreen() {
   const router = useRouter();
