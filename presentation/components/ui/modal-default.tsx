@@ -1,5 +1,5 @@
 import { ReactNode } from "react"
-import { Modal, TouchableOpacity, TouchableWithoutFeedback, View } from "react-native"
+import { KeyboardAvoidingView, Modal, Platform, TouchableOpacity, TouchableWithoutFeedback, View } from "react-native"
 
 interface ModalefaultProps {
   isOpen: boolean
@@ -19,17 +19,22 @@ export function ModalDefault({
       onRequestClose={onClose}
       animationType="none"
     >
-      <TouchableOpacity
-        className="bg-black/30 flex-1 justify-end"
-        onPress={onClose}
-        activeOpacity={0.7}
+      <KeyboardAvoidingView 
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        className="flex-1"
       >
-        <TouchableWithoutFeedback onPress={(e) => e.stopPropagation()}>
-          <View className="bg-white w-full h-full">
-            {children}
-          </View>
-        </TouchableWithoutFeedback>
-      </TouchableOpacity>
+        <TouchableOpacity
+          className="bg-black/30 flex-1 justify-end"
+          onPress={onClose}
+          activeOpacity={0.7}
+        >
+          <TouchableWithoutFeedback onPress={(e) => e.stopPropagation()}>
+            <View className="bg-white w-full h-full">
+              {children}
+            </View>
+          </TouchableWithoutFeedback>
+        </TouchableOpacity>
+      </KeyboardAvoidingView>
     </Modal>
   )
 }

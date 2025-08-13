@@ -3,7 +3,7 @@ import { FormError } from '@/shared/types/form';
 import { formatCpf } from '@/shared/utils/format';
 import { forwardRef } from 'react';
 import { Control, Controller, FieldValues, RegisterOptions } from 'react-hook-form';
-import { Text, TextInput, TextInputProps, View } from 'react-native';
+import { Keyboard, Text, TextInput, TextInputProps, TouchableWithoutFeedback, View } from 'react-native';
 
 interface CpfInputProps<T extends FieldValues> extends Omit<TextInputProps, 'onChangeText'> {
 	label?: string;
@@ -28,6 +28,7 @@ export const CpfInput = forwardRef<TextInput, CpfInputProps<any>>(({
 	...rest 
   }, ref) => {
 		return (
+		<TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
 			<View className="pb-5">
 				{(label || label2) && (
 					<View className='flex-row items-center pb-1'>
@@ -60,12 +61,15 @@ export const CpfInput = forwardRef<TextInput, CpfInputProps<any>>(({
 								pointerEvents={disabled ? 'none' : 'auto'}
 								style={{ borderColor: error ? '#ef4444' : '#D7D7D7' }}
 								className='disabled:text-[#888] text-base font-normal flex-1'
+								inputMode="numeric"
+								returnKeyType="done"
 							/>
 						)}
 					/>
 				</View>
 				{error?.message && typeof error.message === 'string' && <Text className='text-xs text-red-500 font-normal'>{error?.message}</Text>}
 			</View>
+		</TouchableWithoutFeedback>
 		);
 	},
 );

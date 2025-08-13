@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import { ReactNode } from 'react';
-import { Modal, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
+import { KeyboardAvoidingView, Modal, Platform, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
 
 export const ModalRouter = ({ children }: { children: ReactNode }) => {
   const navigation = useNavigation();
@@ -16,17 +16,22 @@ export const ModalRouter = ({ children }: { children: ReactNode }) => {
       onRequestClose={closeModal}
       animationType="none"
     >
-      <TouchableOpacity
-        className="bg-black/80 flex-1 justify-end"
-        onPress={closeModal}
-        activeOpacity={0.7}
+      <KeyboardAvoidingView 
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        className="flex-1"
       >
-        <TouchableWithoutFeedback onPress={(e) => e.stopPropagation()}>
-          <View className="bg-white rounded-t-xl w-full" style={{ minHeight: 540 }}>
-            {children}
-          </View>
-        </TouchableWithoutFeedback>
-      </TouchableOpacity>
+        <TouchableOpacity
+          className="bg-black/80 flex-1 justify-end"
+          onPress={closeModal}
+          activeOpacity={0.7}
+        >
+          <TouchableWithoutFeedback onPress={(e) => e.stopPropagation()}>
+            <View className="bg-white rounded-t-xl w-full" style={{ minHeight: 540 }}>
+              {children}
+            </View>
+          </TouchableWithoutFeedback>
+        </TouchableOpacity>
+      </KeyboardAvoidingView>
     </Modal>
   );
 };

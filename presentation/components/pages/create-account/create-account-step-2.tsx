@@ -8,7 +8,7 @@ import { AutocompleteInput } from '../../ui/auto-complete-input';
 import { Button } from '../../ui/button';
 import { InputField } from '../../ui/input-field';
 import { ProgressIndicator } from '../../ui/progress-indicator';
-import { SkeleteonText } from '../../ui/SkeleteonText';
+import { SkeleteonText } from '../../ui/skeleteon-text';
 
 interface FormData {
   location: string;

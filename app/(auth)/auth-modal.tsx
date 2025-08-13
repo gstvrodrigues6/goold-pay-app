@@ -24,7 +24,9 @@ export default function AuthModalScreen() {
       {step === 1 &&
         <View className="p-5 border-b border-border flex-row justify-between">
           <View className="flex-row items-center gap-3">
-            <LongArrowLeftIcon/>
+             <TouchableOpacity onPress={closeModal}>
+              <LongArrowLeftIcon/>
+            </TouchableOpacity>
             <Text className="font-medium text-xl">Acessar conta</Text>
           </View>
 

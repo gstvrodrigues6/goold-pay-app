@@ -9,7 +9,7 @@ export default function HomeScreen() {
     <SafeAreaView className='bg-white'>
       <ScrollView>
         <View className="px-4 py-14">
-          <View className="flex-row items-center gap-2 pt-8">
+          <View className="flex-row items-center gap-2">
             <GooldIcon/>
             <Text className="font-medium text-gray2 text-xl text-center">
               | Pay
