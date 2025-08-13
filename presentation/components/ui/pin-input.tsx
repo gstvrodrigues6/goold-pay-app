@@ -13,6 +13,7 @@ interface PinInputProps {
 	rules?: RegisterOptions;
 	error?: FieldError;
 	numInputs?: number;
+	onSubmitEditing?: () => void;
 }
 
 interface PinInputRef {
@@ -20,7 +21,7 @@ interface PinInputRef {
 }
 
 export const PinInput = forwardRef<PinInputRef, PinInputProps>(
-	({ label, label2, eyeBtn = true, control, name, rules, error, numInputs = 6 }, ref) => {
+	({ label, label2, eyeBtn = true, control, name, rules, error, numInputs = 6, onSubmitEditing }, ref) => {
 		const [showPassword, setShowPassword] = useState(!eyeBtn);
 		const inputRefs = useRef<(TextInput | null)[]>([]);
 
@@ -45,8 +46,10 @@ export const PinInput = forwardRef<PinInputRef, PinInputProps>(
 
 			onChange(newValues.join(''));
 
-			if (value && index < 5) {
+			if (value && index < numInputs - 1) {
 				inputRefs.current[index + 1]?.focus();
+			} else if (value && index === numInputs - 1) {
+				onSubmitEditing?.();
 			}
 		};
 
@@ -56,6 +59,14 @@ export const PinInput = forwardRef<PinInputRef, PinInputProps>(
 				newValues[index - 1] = '';
 				onChange(newValues.join(''));
 				inputRefs.current[index - 1]?.focus();
+			}
+		};
+
+		const handleSubmitEditing = (index: number, currentValues: string[]) => {
+			if (index === numInputs - 1) {
+				onSubmitEditing?.();
+			} else if (currentValues[index]) {
+				inputRefs.current[index + 1]?.focus();
 			}
 		};
 
@@ -100,6 +111,7 @@ export const PinInput = forwardRef<PinInputRef, PinInputProps>(
 											onKeyPress={({ nativeEvent }) => 
 												handleKeyPress(index, nativeEvent.key, values, onChange)
 											}
+											onSubmitEditing={() => handleSubmitEditing(index, values)}
 											style={{
 												aspectRatio: '1 / 1',
 												flex: 1,

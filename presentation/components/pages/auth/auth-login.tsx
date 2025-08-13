@@ -62,6 +62,7 @@ export function AuthLogin({ incrementStep }: { incrementStep: () => void }) {
             return true;
           },
         }}
+        onSubmitEditing={() => codeRef.current?.focus()}
       />
       <InputField
         ref={codeRef}
