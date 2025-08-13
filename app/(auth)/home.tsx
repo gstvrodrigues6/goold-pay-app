@@ -1,11 +1,11 @@
 import { GooldIcon } from "@/presentation/assets/svg/goold-icon";
 import { LinkDefault } from "@/presentation/components/ui/link-default";
 import { Link } from "expo-router";
-import { Image, Text, View } from "react-native";
+import { Image, ScrollView, Text, View } from "react-native";
 
 export default function HomeScreen() {
   return (
-    <View className="h-screen bg-white px-3 py-14">
+    <ScrollView className=" bg-white px-4 py-14">
       <View className="mx-auto max-w-full w-[400px] flex-1  items-center">
         <View className="flex-row items-center gap-2 pt-8">
           <GooldIcon/>
@@ -37,6 +37,6 @@ export default function HomeScreen() {
           </Link>
         </View>
       </View>
-    </View>
+    </ScrollView>
   )
 }
