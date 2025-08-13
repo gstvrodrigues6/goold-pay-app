@@ -7,6 +7,7 @@ import { PinInput } from "../../ui/pin-input"
 
 interface FormData {
 	password: string;
+  confirm: string;
 }
 export function NewPassword({ incrementStep }: { incrementStep: () => void }) {
   const {
@@ -15,6 +16,7 @@ export function NewPassword({ incrementStep }: { incrementStep: () => void }) {
   } = useForm<FormData>();
   
   const passwordRef = useRef<TextInput>(null);
+  const confirmRef = useRef<TextInput>(null);
   
   return (
     <View className="">
@@ -46,24 +48,20 @@ export function NewPassword({ incrementStep }: { incrementStep: () => void }) {
               return true;
             },
           }}
-          onSubmitEditing={() => passwordRef.current?.focus()}
+          onSubmitEditing={() => confirmRef.current?.focus()}
         />
 
         <PinInput
-          ref={passwordRef}
-          label="Confirme sua nova senha de acesso"
+          ref={confirmRef}
+          label="Confirme sua nova senha"
           label2="(Obrigatorio)"
           control={control}
-          name="password"
-          error={errors.password}
+          name="confirm"
+          error={errors.confirm}
           rules={{
             required: 'Campo obrigatório',
-            validate: (value) => {
-              if (!value || value.length < 6) {
-                return 'Senha deve ter 6 dígitos';
-              }
-              return true;
-            },
+            validate: (value, formValues) => 
+              value === formValues.password || 'Senhas não coincidem'
           }}
         />
       </View>
