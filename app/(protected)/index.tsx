@@ -17,7 +17,7 @@ export default function HomeScreen() {
   const { myAccount, clearAuth } = useAuthStore();
   
   return (
-    <SafeAreaView className='bg-white '>
+    <SafeAreaView className='bg-white'>
       <ScrollView>
         <View className="px-4 py-14">
           {/* Header */}
