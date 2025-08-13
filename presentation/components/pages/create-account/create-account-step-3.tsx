@@ -34,7 +34,7 @@ export default function CreateAccountStep3({ step, incrementStep }: { step: numb
         </View>
       </ScrollView>
 
-      <View className="gap-3 px-6 py-4 pb-8 border-t border-border">
+      <View className="gap-3 px-6 py-4 pb-8 z-10 bg-white border-t border-border">
         <Button onPress={incrementStep}>
           Prosseguir
         </Button>
