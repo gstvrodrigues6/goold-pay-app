@@ -6,6 +6,7 @@ import { SplashScreen, Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import Toast from 'react-native-toast-message';
 
 SplashScreen.preventAutoHideAsync();
@@ -29,7 +30,7 @@ export default function RootLayout() {
   }
 
   return (
-    <>
+    <SafeAreaProvider>
       <Stack>
         <Stack.Screen name="(auth)" options={{ headerShown: false, animation: 'none' }} />
         <Stack.Screen name="(protected)" options={{ headerShown: false, animation: 'none' }} />
@@ -37,6 +38,6 @@ export default function RootLayout() {
       </Stack>
       <Toast config={toastConfig} />
       <StatusBar style="auto" />
-    </>
+    </SafeAreaProvider>
   );
 }
