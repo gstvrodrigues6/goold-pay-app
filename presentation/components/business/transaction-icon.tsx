@@ -6,20 +6,20 @@ export const TransactionIcon = ({ type }: { type: string }) => {
   switch (type) {
     case "commission":
       return (
-        <View className="w-14 h-14 bg-secondary border border-border2 rounded-full items-center justify-center">
-          <CommissionIcon />
+        <View className="py-8">
+          <CommissionIcon width={90} height={90}/>
         </View>
       )
     case "pix":
       return (
-        <View className="w-14 h-14 bg-secondary border border-border2 rounded-full items-center justify-center">
-          <PixIcon />
+        <View className="py-8">
+          <PixIcon width={90} height={90} />
         </View>
       )
     default:
       return (
-        <View className="w-14 h-14 bg-secondary border border-border2 rounded-full items-center justify-center">
-          <CommissionIcon />
+        <View className="py-8">
+          <CommissionIcon width={90} height={90}/>
         </View>
       )
   }

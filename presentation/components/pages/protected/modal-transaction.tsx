@@ -1,18 +1,20 @@
 import { CloseIcon } from "@/presentation/assets/svg/close-icon"
-import { CommissionIcon } from "@/presentation/assets/svg/comission-icon"
 import { TransactioIcon } from "@/presentation/assets/svg/transaction-icon"
 import { useState } from "react"
 import { Text, TouchableOpacity, View } from "react-native"
+import { TransactionIcon } from "../../business/transaction-icon"
 import { ModalBottom } from "../../ui/modal-bottom"
 import { ModalProofTransaction } from "./modal-proof-transaction"
 
-export const ModalTransaction = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => void }) => {
+export const ModalTransaction = ({ isOpen, onClose, transaction }: { isOpen: boolean, onClose: () => void, transaction: any }) => {
   const [isOpenProof, setIsOpenProof] = useState(false)
-
+  
   const openProof = () => {
     setIsOpenProof(true)
     onClose()
   }
+
+  if(!transaction) return null
 
   return (
     <>
@@ -21,17 +23,15 @@ export const ModalTransaction = ({ isOpen, onClose }: { isOpen: boolean, onClose
           <CloseIcon width={12} />
         </TouchableOpacity>
         <View className="pt-10 px-4">
-          <View className="py-8">
-            <CommissionIcon width={90} height={90}/>
-          </View>
-          <Text className="text-3xl font-semibold pb-6">Comissão Venda - Pix</Text>
+          <TransactionIcon type={transaction.icon}/>
+          <Text className="text-3xl font-semibold pb-6">{transaction.title}</Text>
           <View className="flex-row justify-between py-4 border-b border-border">
             <Text className="text-base font-medium">Cliente</Text>
             <Text className="text-base">Mateus barbosa dos santos</Text>
           </View>
           <View className="flex-row justify-between py-4 border-b border-border">
             <Text className="text-base font-medium">Valor comissão</Text>
-            <Text className="text-base">R$ 40,00</Text>
+            <Text className="text-base">R$ {transaction.amount.toFixed(2).replace(".", ",")}</Text>
           </View>
           <View className="flex-row justify-between py-4 border-b border-border">
             <Text className="text-base font-medium">Quando</Text>
