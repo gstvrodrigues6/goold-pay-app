@@ -187,7 +187,6 @@ export default function CreateAccountStep1({ step, incrementStep }: { step: numb
                 return true;
               },
             }}
-            onSubmitEditing={() => passwordRef.current?.blur()}
           />
         </View>
       </ScrollView>
