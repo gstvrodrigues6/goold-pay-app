@@ -52,7 +52,6 @@ export const AutocompleteInput = forwardRef<TextInput, AutocompleteInputProps<an
   };
 
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <View className='pb-5'>
         {(label || label2) && (
           <View className='flex-row items-center pb-1'>
@@ -66,17 +65,19 @@ export const AutocompleteInput = forwardRef<TextInput, AutocompleteInputProps<an
           rules={rules}
           render={({ field: { onChange, onBlur, value } }) => (
             <>
-              <TextInput
-                {...rest}
-                ref={ref}
-                value={value}
-                onBlur={onBlur}
-                onChangeText={(text) => handleSearch(text, onChange)}
-                editable={!disabled}
-                placeholderTextColor={'#A0A0A0'}
-                style={{ borderColor: error ? '#ef4444' : '#D7D7D7' }}
-                className='disabled:bg-[#f0f0f0] disabled:text-[#888] min-h-14 focus:border-primary border rounded-[10px] p-3 text-base font-normal'
-              />
+              <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+                <TextInput
+                  {...rest}
+                  ref={ref}
+                  value={value}
+                  onBlur={onBlur}
+                  onChangeText={(text) => handleSearch(text, onChange)}
+                  editable={!disabled}
+                  placeholderTextColor={'#A0A0A0'}
+                  style={{ borderColor: error ? '#ef4444' : '#D7D7D7' }}
+                  className='disabled:bg-[#f0f0f0] disabled:text-[#888] min-h-14 focus:border-primary border rounded-[10px] p-3 text-base font-normal'
+                />
+              </TouchableWithoutFeedback>
               {showSuggestions && filteredCities.length > 0 && (
                 <View className="absolute top-[80px] w-full bg-white border border-gray-300 rounded-md shadow-md z-10">
                   <ScrollView 
@@ -101,7 +102,6 @@ export const AutocompleteInput = forwardRef<TextInput, AutocompleteInputProps<an
         />
         {error?.message && typeof error.message === 'string' && <Text className='text-xs text-red-500 font-normal'>{error?.message}</Text>}
       </View>
-    </TouchableWithoutFeedback>
   );
 });
 
