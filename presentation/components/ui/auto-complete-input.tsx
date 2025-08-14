@@ -62,7 +62,7 @@ export const AutocompleteInput = forwardRef<TextInput, AutocompleteInputProps<an
         <Controller
           name={name}
           control={control}
-          rules={rules}
+          rules={{ ...rules, validate: validateCityExists }}
           render={({ field: { onChange, onBlur, value } }) => (
             <>
               <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
@@ -106,3 +106,20 @@ export const AutocompleteInput = forwardRef<TextInput, AutocompleteInputProps<an
 });
 
 AutocompleteInput.displayName = 'AutocompleteInput';
+
+const validateCityExists = (value: string) => {
+  if (!value) return 'A cidade é obrigatória.';
+
+  const [cityName, cityUf] = value.split(' - ');
+  
+  if (!cityName || !cityUf) {
+    return 'Por favor, selecione uma cidade válida da lista.';
+  }
+
+  const cityExists = Object.values(citiesMock).some(city => 
+    removeAccents(city.cidade.toLowerCase()) === removeAccents(cityName.toLowerCase()) && 
+    city.uf.toLowerCase() === cityUf.toLowerCase()
+  );
+
+  return cityExists || 'Por favor, selecione uma cidade válida da lista.';
+};
